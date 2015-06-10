@@ -1,5 +1,5 @@
 ##' @export
-run.demo <- function(duration=60)
+run.demo.old <- function(duration=60)
     {
         dsp <- open_display(640,480,"Original image")
         dsp2 <- open_display(640,480,"2nd order edge filter")
@@ -20,3 +20,20 @@ run.demo <- function(duration=60)
     }
 
 
+##' @export
+run.demo <- function(fun = function(v) isoblur(v,3),duration=30)
+    {
+        cam <- opencam()
+        dsp <- opendisplay(640,480,"Original image")
+        dsp2 <- opendisplay(640,480,"Modified image")
+        t0 <- Sys.time()
+        while ((Sys.time() - t0) < duration)
+            {
+                im <- next_frame(cam)
+                writeFrame(dsp,im)
+                writeFrame(dsp2,fun(im))
+            }
+        close(dsp)
+        close(dsp2)
+        close(cam)
+    }

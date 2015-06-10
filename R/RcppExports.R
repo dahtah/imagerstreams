@@ -17,11 +17,6 @@ display_show <- function(dsp, im) {
 }
 
 #' @export
-getFrame <- function(file) {
-    .Call('imagerstreams_getFrame', PACKAGE = 'imagerstreams', file)
-}
-
-#' @export
 open_stream <- function(file) {
     .Call('imagerstreams_open_stream', PACKAGE = 'imagerstreams', file)
 }

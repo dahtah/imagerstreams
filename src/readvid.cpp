@@ -10,25 +10,6 @@ using namespace Rcpp;
 using namespace cv;
 using namespace cimg_library;
 
-//' @export
-//[[Rcpp::export]]
-NumericVector getFrame(std::string file)
-{
-  VideoCapture cap(file.c_str());
-  if ( !cap.isOpened() )  
-    {
-      stop("Cannot open file");
-    }
-  Mat frame;
-  bool bSuccess = cap.read(frame); 
-  if (!bSuccess) 
-    {
-      stop("Cannot read frame");
-      
-    }
-  CImg<double> img(frame);
-  return wrap(img);
-}
 
 //' @export
 // [[Rcpp::export]]
@@ -87,8 +68,8 @@ Rcpp::List stream_info(Rcpp::XPtr<cv::VideoCapture> cap)
   out["height"] = cap->get(CV_CAP_PROP_FRAME_HEIGHT);
   out["fps"] = cap->get(CV_CAP_PROP_FPS);
   //  std::string fourcc = cap->get(CV_CAP_PROP_FOURCC);
-  out["nframes"] = cap->get(CV_CAP_PROP_FRAME_COUNT);
-    return out;
+  out["nframes"] = cap->get(CV_CAP_PROP_FRAME_COUNT)+1;
+  return out;
 }
 
 //' @export

@@ -44,17 +44,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// getFrame
-NumericVector getFrame(std::string file);
-RcppExport SEXP imagerstreams_getFrame(SEXP fileSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::string >::type file(fileSEXP);
-    __result = Rcpp::wrap(getFrame(file));
-    return __result;
-END_RCPP
-}
 // open_stream
 XPtr<cv::VideoCapture> open_stream(std::string file);
 RcppExport SEXP imagerstreams_open_stream(SEXP fileSEXP) {
