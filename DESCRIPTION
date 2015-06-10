@@ -1,0 +1,12 @@
+Package: imagerstreams
+Type: Package
+Title: Process video streams (add-on for imager)
+Version: 1.0
+Date: 2015-06-09
+Author: Simon Barthelmé <simon.barthelme@gipsa-lab.fr>
+Maintainer: Simon Barthelmé <simon.barthelme@gipsa-lab.fr>
+Description: This is an add-on package for imager. It enables the processing of videos too large to fit in memory.
+License: GPL (>= 2)
+Imports: Rcpp (>= 0.11.5)
+Depends: imager
+LinkingTo: Rcpp

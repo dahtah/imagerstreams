@@ -1,0 +1,2 @@
+PKG_CPPFLAGS += -I/opt/X11/lib -I/usr/X11R6/include `pkg-config --cflags opencv`
+PKG_LIBS +=  -L/opt/X11/lib -L/usr/X11R6/include -lX11 `pkg-config --cflags --libs opencv` $(RCPP_LDFLAGS) 
