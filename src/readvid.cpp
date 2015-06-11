@@ -116,7 +116,7 @@ NumericVector next_block(Rcpp::XPtr<cv::VideoCapture> cap,int nframes)
 	  break;
 	}
       CImg<double> img(frame);
-      frames.insert(img,i,true);
+      frames.insert(img,i,false);
     }
   CImg<double> out(frames.get_append('z'));
   return wrap(out);

@@ -56,6 +56,10 @@ write_ostream <- function(str, im) {
     invisible(.Call('imagerstreams_write_ostream', PACKAGE = 'imagerstreams', str, im))
 }
 
+close_ostream <- function(str) {
+    invisible(.Call('imagerstreams_close_ostream', PACKAGE = 'imagerstreams', str))
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call('imagerstreams_RcppExport_registerCCallable', PACKAGE = 'imagerstreams')

@@ -157,6 +157,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// close_ostream
+void close_ostream(Rcpp::XPtr<cv::VideoWriter> str);
+RcppExport SEXP imagerstreams_close_ostream(SEXP strSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<cv::VideoWriter> >::type str(strSEXP);
+    close_ostream(str);
+    return R_NilValue;
+END_RCPP
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int imagerstreams_RcppExport_validate(const char* sig) { 

@@ -34,3 +34,9 @@ void write_ostream(Rcpp::XPtr<cv::VideoWriter> str,NumericVector im)
 }
 
 
+// [[Rcpp::export]]
+void close_ostream(Rcpp::XPtr<cv::VideoWriter> str)
+{
+  str->release();
+  return;
+}
