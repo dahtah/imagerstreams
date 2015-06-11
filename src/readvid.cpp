@@ -11,7 +11,6 @@ using namespace cv;
 using namespace cimg_library;
 
 
-//' @export
 // [[Rcpp::export]]
 XPtr<cv::VideoCapture> open_stream(std::string file)
 {
@@ -24,7 +23,7 @@ XPtr<cv::VideoCapture> open_stream(std::string file)
   return ptr;
 }
 
-//' @export
+
 // [[Rcpp::export]]
 XPtr<cv::VideoCapture> open_camera(int device=0)
 {
@@ -38,7 +37,7 @@ XPtr<cv::VideoCapture> open_camera(int device=0)
 }
 
 
-//' @export
+
 // [[Rcpp::export]]
 void close_stream(Rcpp::XPtr<cv::VideoCapture> cap)
 {
@@ -46,7 +45,7 @@ void close_stream(Rcpp::XPtr<cv::VideoCapture> cap)
   return;
 }
 
-//' @export
+
 // [[Rcpp::export]]
 void stream_skipto(Rcpp::XPtr<cv::VideoCapture> cap,int frame=1)
 {
@@ -59,7 +58,8 @@ void stream_skipto(Rcpp::XPtr<cv::VideoCapture> cap,int frame=1)
 }
 
 
-//' @export
+
+
 // [[Rcpp::export]]
 Rcpp::List stream_info(Rcpp::XPtr<cv::VideoCapture> cap)
 {
@@ -72,7 +72,7 @@ Rcpp::List stream_info(Rcpp::XPtr<cv::VideoCapture> cap)
   return out;
 }
 
-//' @export
+
 // [[Rcpp::export]]
 Rcpp::List stream_status(Rcpp::XPtr<cv::VideoCapture> cap)
 {
@@ -86,7 +86,7 @@ Rcpp::List stream_status(Rcpp::XPtr<cv::VideoCapture> cap)
 
 
 
-//' @export
+
 // [[Rcpp::export]]
 NumericVector next_frame(Rcpp::XPtr<cv::VideoCapture> cap)
 {
@@ -98,6 +98,28 @@ NumericVector next_frame(Rcpp::XPtr<cv::VideoCapture> cap)
     }
   CImg<double> img(frame);
   return wrap(img);
+}
+
+// [[Rcpp::export]]
+NumericVector next_block(Rcpp::XPtr<cv::VideoCapture> cap,int nframes)
+{
+  Mat frame;
+  //  CImgList<double> frames(nframes);
+  CImgList<double> frames;
+  
+  for (int i = 0; i < nframes; i++)
+    {
+      bool bSuccess = cap->read(frame); 
+      if (!bSuccess) 
+	{
+	  warning("Block ended prematurely");
+	  break;
+	}
+      CImg<double> img(frame);
+      frames.insert(img,i,true);
+    }
+  CImg<double> out(frames.get_append('z'));
+  return wrap(out);
 }
 
 

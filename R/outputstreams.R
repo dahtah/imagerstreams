@@ -10,6 +10,20 @@ opendisplay <- function(w=640,h=480,title="")
     }
 
 ##' @export
+openvideowriter <- function(fname,w=640,h=480)
+    {
+        str <- open_ostream(fname,w,h)
+        attr(str,"class") <- "ostream"
+        attr(str,"fname") <- fname
+        attr(str,"width") <- w
+        attr(str,"height") <- h
+        attr(str,"type") <- "writer"
+        str
+    }
+
+
+
+##' @export
 print.ostream <- function(str)
     {
         att <- attributes(str)
@@ -17,11 +31,22 @@ print.ostream <- function(str)
             {
                 msg <- with(att,sprintf("Display. Dim: %i x %i (pix)",width,height))
             }
+        if (iswriter(str))
+            {
+                msg <- with(att,sprintf("Video output to file: %s. Dim: %i x %i (pix)",fname,width,height))
+            }
+
+        
         ## else if (att$type == "file")
         ##     {
         ##         msg <- with(att,sprintf("Video file %s. Dim %i x %i (pix). Number of frames %i",fname,width,height,nframes))
         ##     }
         print(msg)
+    }
+
+iswriter <- function(str)
+    {
+        attr(str,"type") == "writer"
     }
 
 isdisplay <- function(str)
@@ -35,6 +60,10 @@ writeFrame <- function(str,im)
         if (isdisplay(str))
             {
                 display_show(str,im)
+            }
+        else if (iswriter(str))
+            {
+                write_ostream(str,im)
             }
     }
 

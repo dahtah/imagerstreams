@@ -16,39 +16,44 @@ display_show <- function(dsp, im) {
     invisible(.Call('imagerstreams_display_show', PACKAGE = 'imagerstreams', dsp, im))
 }
 
-#' @export
 open_stream <- function(file) {
     .Call('imagerstreams_open_stream', PACKAGE = 'imagerstreams', file)
 }
 
-#' @export
 open_camera <- function(device = 0L) {
     .Call('imagerstreams_open_camera', PACKAGE = 'imagerstreams', device)
 }
 
-#' @export
 close_stream <- function(cap) {
     invisible(.Call('imagerstreams_close_stream', PACKAGE = 'imagerstreams', cap))
 }
 
-#' @export
 stream_skipto <- function(cap, frame = 1L) {
     invisible(.Call('imagerstreams_stream_skipto', PACKAGE = 'imagerstreams', cap, frame))
 }
 
-#' @export
 stream_info <- function(cap) {
     .Call('imagerstreams_stream_info', PACKAGE = 'imagerstreams', cap)
 }
 
-#' @export
 stream_status <- function(cap) {
     .Call('imagerstreams_stream_status', PACKAGE = 'imagerstreams', cap)
 }
 
-#' @export
 next_frame <- function(cap) {
     .Call('imagerstreams_next_frame', PACKAGE = 'imagerstreams', cap)
+}
+
+next_block <- function(cap, nframes) {
+    .Call('imagerstreams_next_block', PACKAGE = 'imagerstreams', cap, nframes)
+}
+
+open_ostream <- function(file, width, height, frameRate = 30) {
+    .Call('imagerstreams_open_ostream', PACKAGE = 'imagerstreams', file, width, height, frameRate)
+}
+
+write_ostream <- function(str, im) {
+    invisible(.Call('imagerstreams_write_ostream', PACKAGE = 'imagerstreams', str, im))
 }
 
 # Register entry points for exported C++ functions

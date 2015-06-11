@@ -27,13 +27,15 @@ run.demo <- function(fun = function(v) isoblur(v,3),duration=30)
         dsp <- opendisplay(640,480,"Original image")
         dsp2 <- opendisplay(640,480,"Modified image")
         t0 <- Sys.time()
-        while ((Sys.time() - t0) < duration)
+        tryCatch(
             {
-                im <- next_frame(cam)
-                writeFrame(dsp,im)
-                writeFrame(dsp2,fun(im))
-            }
-        close(dsp)
+                while ((Sys.time() - t0) < duration)
+                    {
+                        im <- getFrame(cam)
+                        writeFrame(dsp,im)
+                        writeFrame(dsp2,fun(im))
+                    }
+            },finally={        close(dsp)
         close(dsp2)
-        close(cam)
+        close(cam)})
     }

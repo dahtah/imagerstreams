@@ -92,3 +92,8 @@ getFrame <- function(str,skip=0)
         next_frame(str)
     }
 
+getBlock <- function(str,nFrames)
+    {
+        next_block(str,nFrames)
+    }
+    

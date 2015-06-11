@@ -120,6 +120,43 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// next_block
+NumericVector next_block(Rcpp::XPtr<cv::VideoCapture> cap, int nframes);
+RcppExport SEXP imagerstreams_next_block(SEXP capSEXP, SEXP nframesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<cv::VideoCapture> >::type cap(capSEXP);
+    Rcpp::traits::input_parameter< int >::type nframes(nframesSEXP);
+    __result = Rcpp::wrap(next_block(cap, nframes));
+    return __result;
+END_RCPP
+}
+// open_ostream
+XPtr<cv::VideoWriter> open_ostream(std::string file, int width, int height, double frameRate);
+RcppExport SEXP imagerstreams_open_ostream(SEXP fileSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP frameRateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::string >::type file(fileSEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< double >::type frameRate(frameRateSEXP);
+    __result = Rcpp::wrap(open_ostream(file, width, height, frameRate));
+    return __result;
+END_RCPP
+}
+// write_ostream
+void write_ostream(Rcpp::XPtr<cv::VideoWriter> str, NumericVector im);
+RcppExport SEXP imagerstreams_write_ostream(SEXP strSEXP, SEXP imSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<cv::VideoWriter> >::type str(strSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type im(imSEXP);
+    write_ostream(str, im);
+    return R_NilValue;
+END_RCPP
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int imagerstreams_RcppExport_validate(const char* sig) { 
