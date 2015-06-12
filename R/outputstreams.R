@@ -7,12 +7,12 @@
 ##' @export
 opendisplay <- function(width=640,height=480,title="")
     {
-        dsp <- open_display(w,h,title)
+        dsp <- open_display(width,height,title)
         attr(dsp,"class") <- "ostream"
         attr(dsp,"width") <- width
         attr(dsp,"height") <- height
         attr(dsp,"type") <- "display"
-        attr(str,"open") <- TRUE
+        attr(dsp,"open") <- TRUE
         dsp
     }
 
